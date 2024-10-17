@@ -58,5 +58,17 @@ Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://loc
 cd my-project/
 symfony server:start
 ```
+## CLASE 414.1
+### Subiendo el proyecto a GitHub
+Tras crear la aplicación, en su versión "virgen", vamos a subirlo a Github para ir guardando los cambios.
+- Creamos un nuevo repositorio en GitHub
+- git init
+- git branch -m main (ahora pasa de llamarse master a main)
+- creamos un README.md
+-git add .
+- git commit -m "Inicio"
+- git remote add origin git@github.com:VicenteCorts/Symfony-Firsts-Steps.git
+- git push -u origin main
+
 ## CLASE 415
 ###
