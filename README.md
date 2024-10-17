@@ -31,7 +31,7 @@ cd my_project_directory
 composer require webapp
 ```
 
-#### Proyecto ya existente de Symfony
+#### 3. Proyecto ya existente de Symfony
 Para levantar un proyecto ya existente ejecutaremos las siguientes líneas en la consola de comandos en vez de las anteriores:
 ```html
 # clone the poroject to download its contents
@@ -45,21 +45,7 @@ composer install
 - Posteriormente será necesario hacer cambiso en el archivo **.env**, configurar la **base de datos**, etc.
 - puede ser útil ejecutar el comando: **php bin/console about** para mostrar información sobre el proyecto.
 
-### Desplegar Symfony 
-#### Apache
-Debemos instalar un paquete para poder trabajar con servidores Apache (necesario también para crear un hostvirtual)
-```html
-composer require symfony/apache-pack
-y
-```
-#### Symfony Server
-Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
-```html
-cd my-project/
-symfony server:start
-```
-## CLASE 414.1
-### Subiendo el proyecto a GitHub
+## Subiendo el proyecto a GitHub 
 Tras crear la aplicación, en su versión "virgen", vamos a subirlo a Github para ir guardando los cambios.
 - Creamos un nuevo repositorio en GitHub
 - git init
@@ -69,6 +55,21 @@ Tras crear la aplicación, en su versión "virgen", vamos a subirlo a Github par
 - git commit -m "Inicio"
 - git remote add origin git@github.com:VicenteCorts/Symfony-Firsts-Steps.git
 - git push -u origin main
+
+## Desplegar Symfony 
+En caso de la versión 6.4.* no ha sido necesario este apartado, pero por si algún día es de utilidad:
+> ### Apache
+> Debemos instalar un paquete para poder trabajar con servidores Apache (necesario también para crear un hostvirtual)
+> ```html
+> composer require symfony/apache-pack
+> y
+> ```
+> ### Symfony Server
+> Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
+> ```html
+> cd my-project/
+> symfony server:start
+> ```
 
 ## CLASE 415
 ###
