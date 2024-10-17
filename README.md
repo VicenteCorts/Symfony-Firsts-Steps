@@ -64,7 +64,7 @@ Debemos instalar un paquete para poder trabajar con servidores Apache (necesario
 composer require symfony/apache-pack
 y
 ```
-En caso de error al instalar el "symfony/apache-pack":
+En caso de **error al instalar el symfony/apache-pack**:
 
 1) Abrir el archivo composer.json (se encuentra en el directorio raíz del proyecto ) ir al final y cambiar a "true" el valor de la propiedad "allow-contrib". Por defecto viene en false:
 ```html
@@ -94,8 +94,8 @@ symfony server:start
 ## CLASE 415
 ### VHOST
 #### VICTOR ROBLES
-<hr/>
 Accedemos a: A:/wamp64/bin/apache/apache2.4.58/conf/extra/httpdvhost y añadimos un nuevo vhost:
+
 ```html
 # Vhost para carpeta: 11aprendiendo symfony
 #
@@ -116,7 +116,6 @@ A continuación accedemos a C:\Windows\System32\drivers\etc\hosts con **vscode**
 ::1	aprendiendo-symfony.com.devel
 ```
 #### VICENTE CORTS
-<hr/>
 Accedemos a localhost y en el apartado inferior de la izquierda clicamos en "Añadir un host virtual". Rellenamos los inputs:
 ```html
 aprendiendo-symfony.com.devel
