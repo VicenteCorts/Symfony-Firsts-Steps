@@ -57,19 +57,93 @@ Tras crear la aplicación, en su versión "virgen", vamos a subirlo a Github par
 - git push -u origin main
 
 ## Desplegar Symfony 
-En caso de la versión 6.4.* no ha sido necesario este apartado, pero por si algún día es de utilidad:
-> ### Apache
-> Debemos instalar un paquete para poder trabajar con servidores Apache (necesario también para crear un hostvirtual)
-> ```html
-> composer require symfony/apache-pack
-> y
-> ```
-> ### Symfony Server
-> Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
-> ```html
-> cd my-project/
-> symfony server:start
-> ```
+~En caso de la versión 6.4.* no ha sido necesario este apartado, pero por si algún día es de utilidad:~
+### Apache
+Debemos instalar un paquete para poder trabajar con servidores Apache (necesario también para crear un hostvirtual)
+```html
+composer require symfony/apache-pack
+y
+```
+En caso de error al instalar el "symfony/apache-pack":
+
+1) Abrir el archivo composer.json (se encuentra en el directorio raíz del proyecto ) ir al final y cambiar a "true" el valor de la propiedad "allow-contrib". Por defecto viene en false:
+```html
+"extra": {
+        "symfony": {
+            "allow-contrib": true,
+            "require": "5.1.*"
+        }
+    }
+```
+2) Ir a la consola y ejecutar el comando:
+```html
+composer remove symfony/apache-pack
+```
+3) Por último ejecutar el comando:
+```html
+composer require symfony/apache-pack
+```
+
+### Symfony Server
+Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
+```html
+cd my-project/
+symfony server:start
+```
 
 ## CLASE 415
-###
+### VHOST
+#### VICTOR ROBLES
+<hr/>
+Accedemos a: A:/wamp64/bin/apache/apache2.4.58/conf/extra/httpdvhost y añadimos un nuevo vhost:
+```html
+# Vhost para carpeta: 11aprendiendo symfony
+#
+<VirtualHost *:80>
+	ServerName aprendiendo-symfony.com.devel
+	DocumentRoot "a:/wamp64/www/master-php/11aprendiendo-symfony/public"
+	<Directory  "a:/wamp64/www/master-php/11aprendiendo-symfony/public/">
+		Options +Indexes +Includes +FollowSymLinks +MultiViews
+		AllowOverride All
+		Require local
+	</Directory>
+</VirtualHost>
+#
+```
+A continuación accedemos a C:\Windows\System32\drivers\etc\hosts con **vscode** para poder guardar como administrador y añadimos:
+```html
+127.0.0.1	aprendiendo-symfony.com.devel
+::1	aprendiendo-symfony.com.devel
+```
+#### VICENTE CORTS
+<hr/>
+Accedemos a localhost y en el apartado inferior de la izquierda clicamos en "Añadir un host virtual". Rellenamos los inputs:
+```html
+aprendiendo-symfony.com.devel
+a:/wamp64/www/master-php/11aprendiendo-symfony/public/
+PHP: 8.3.0
+```
+Nuevamente en localhost nos vamos al apartado inferior derecha y clicamos en abrir nuestro nuevo vhost en una pestaña nueva
+
+## CLASE 416
+### Estructura de Symfony
+- (Victor Explica para 4.3, pero estamos en 6.4.* LTS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
