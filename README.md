@@ -51,7 +51,7 @@ Tras crear la aplicación, en su versión "virgen", vamos a subirlo a Github par
 - git init
 - git branch -m main (ahora pasa de llamarse master a main)
 - creamos un README.md
--git add .
+- git add .
 - git commit -m "Inicio"
 - git remote add origin git@github.com:VicenteCorts/Symfony-Firsts-Steps.git
 - git push -u origin main
@@ -71,7 +71,7 @@ En caso de **error al instalar el symfony/apache-pack**:
 "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "5.1.*"
+            "require": "6.4.*"
         }
     }
 ```
@@ -85,7 +85,8 @@ composer require symfony/apache-pack
 ```
 
 ### Symfony Server
-Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
+https://symfony.com/doc/current/setup/symfony_server.html
+- Además de Ngnix o Apache podemos usar el servidor local de Symfony: (http://localhost:8000/)
 ```html
 cd my-project/
 symfony server:start
@@ -189,9 +190,49 @@ Podemos editar la vista para que muestre el segundo parámetro (hello) en vez de
 ```
 
 ## CLASE 418
-###
+### Configuraciones URL
+Las rutas se definen justo encima del método al que dirigen: **#[Route('/home', name: 'app_home')]**
+```html
+class HomeController extends AbstractController
+{
+    #[Route('/home', name: 'app_home')]
+    public function index(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+            'hello' => 'Hola Symfony',
+        ]);
+    }
+}
+```
+En el archivo config/routes.yml
+- Para crear rutas nos dirigimos a este archivo y escribimos el siguinte código
+```html
+home:
+    path: /inicio
+    controller: App\Controller\HomeController::index
+```
+- Ahora escribiendo en el navegador **http://localhost:8000/inicio** nos redirige a la misma página que **http://localhost:8000/home**
 
-
+### Programando:
+Ahora crearemos otro método dentro de HomController
+```html
+    public function animales() {
+        
+        $title = 'Bienvenido a la página de animales';
+        
+        return $this->render('home/animales.html.twig',[
+            'title' => $title,
+        ]);
+    }
+```
+- A continuación nos dirigiremos a la carpeta templates/home y crearemos un nuevo archivo clicando en **otros->PHP->html.twig**
+- Ahora nos dirigimos a config/routes.yml y creamos su ruta: (es importante la estructura de la ruta -espacios y tabulaciones-)
+```html
+animales:
+    path: /animales
+    controller: App\Controller\HomeController::animales
+```
 
 
 

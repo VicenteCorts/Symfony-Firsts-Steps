@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+    
+home:
+    path: /inicio
+    controller: App\Controller\HomeController::index
+    
+animales:
+    path: /animales
+    controller: App\Controller\HomeController::animales
