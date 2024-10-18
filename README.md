@@ -126,13 +126,34 @@ Nuevamente en localhost nos vamos al apartado inferior derecha y clicamos en abr
 
 ## CLASE 416
 ### Estructura de Symfony
-- (Victor Explica para 4.3, pero estamos en 6.4.* LTS)
+(Victor Explica para 4.3, pero estamos en 6.4.* LTS)
+- Carpeta bin (ejecutables de consola)
+- config (configuración general de paquetes, desarollo,... incluye la carpeta packages y routes)
+	+ packages
+	+ routes
+	+ bundles.php -> instalación de paquetes de symfony o de terceros
+	+ routes.yml -> Trabajr con las rutas (web.php de laravel)
+	+ services.yml -> configurar diferentes servicios en symfony
+- migrations (para las migraciones)
+- public (carpeta de entrada al proyecto)
+- src: código principal con el que trabajaremos, simimlar a laravel
+	+ Controller
+ 	+ Entity (para modelos)
+	+ Repository (clases de tipo repositorio de consulta)
+	+ Kernel.php: más configuraciones
+- templates (vistas)
+- test (para tests unitarios que queramos hacer y test en general)
+- translations
+- var (carpeta donde se almacena la caché y los logs)
+- vendor (carpeta donde se instalan todos los paquetes y dependencias del framework)
+- fichero .env (configuración de la BBDD y otros)
+- .gitignore
+-composer.json (versiones de paquetes)
 
 
-
-
-
-
+## CLASE 417
+### Controladores
+### Hola Symfony
 
 
 
