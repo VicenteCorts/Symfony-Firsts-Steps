@@ -152,8 +152,51 @@ Nuevamente en localhost nos vamos al apartado inferior derecha y clicamos en abr
 
 
 ## CLASE 417
-### Controladores
+Para ver los comandos disponibles por consola: **php bin/console help** o **php bin/console list**
+
+### Crear Controladores
+- Se ubican en src/Controller
+- Se pueden crear manualmente o mediante consola; para consola el comando sería: **php bin/console make:controller HomeController**
+Dentro del controlador observaremos los "use" y los métodos de la clase "HomeController
+- **use**: incluye el ABstractController (controlador padre de Symfony), Response (para recoger datos por formularios) y Route (para hacer anotaciones para las rutas)
+Ahora, escribiendo **"url"/home** en el navegador nos lleva directamente a una página; esto es por que al crear el controlador por consola nos genera una vista sencilla directamente en la **carpeta templates**, todo gracias al método index:
+```html
+    #[Route('/home', name: 'app_home')]
+    public function index(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+```
 ### Hola Symfony
+Si a este código incial le hacemos modificaciones como:
+```html
+    #[Route('/home', name: 'app_home')]
+    public function index(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+            'hello' => 'Hola Symfony',
+        ]);
+    }
+```
+Podemos editar la vista para que muestre el segundo parámetro (hello) en vez de el primero:
+```html
+<div class="example-wrapper">
+    <h1>{{ hello }}! ✅</h1>
+</div>
+```
+
+## CLASE 418
+###
+
+
+
+
+
+
+
 
 
 
