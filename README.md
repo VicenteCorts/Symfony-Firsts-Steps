@@ -273,7 +273,42 @@ animales:
 De este modo generamos un **valor default** para el parámetro en caso de que no exista
 
 ## CLASE 420
-###
+### Rutas Avanzadas
+## Método (POST GET ...)
+Podemos añadir la palabra clave **methods** para especificar el método de llegada de los parámetros
+```html
+animales:
+    path: /animales/{nombre}/{apellidos}
+    controller: App\Controller\HomeController::animales
+    defaults: {nombre: 'GATO', apellidos: 'Y perros'}
+    methods: [GET, PUT]
+```
+## Requeriments
+Podemos añadir expresiones regulares para los parámetros; por ejemplo que nombre sea con letras y apellidos con numeros:
+```html
+animales:
+    path: /animales/{nombre}/{apellidos}
+    controller: App\Controller\HomeController::animales
+    defaults: {nombre: 'GATO', apellidos: 'Y perros'}
+    methods: [GET, PUT]
+    requirements:
+        nombre: '[a-zA-Z]+'
+        apellidos: '[1-9]+'
+```
+https://symfony.com/doc/4.x/routing.html
+
+## CLASE 421
+### Redirecciones
+
+
+
+
+
+
+
+
+
+
 
 
 

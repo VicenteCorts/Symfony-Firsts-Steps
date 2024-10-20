@@ -18,13 +18,14 @@ class HomeController extends AbstractController
     }
     
 //    #[Route('/bichos', name: 'app_animal')]
-    public function animales($nombre) {
+    public function animales($nombre, $apellidos) {
         
         $title = 'Bienvenido a la página de animales';
         
         return $this->render('home/animales.html.twig',[
             'title' => $title,
             'nombre' => $nombre,
+            'apellidos' => $apellidos,
         ]);
     }
 }

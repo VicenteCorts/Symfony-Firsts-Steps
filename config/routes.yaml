@@ -9,6 +9,10 @@ home:
     controller: App\Controller\HomeController::index
     
 animales:
-    path: /animales/{nombre?}
+    path: /animales/{nombre}/{apellidos}
     controller: App\Controller\HomeController::animales
-#    defaults: {nombre: 'GATO'}
+    defaults: {nombre: 'GATO', apellidos: 'Y perros'}
+    methods: [GET, PUT]
+    requirements:
+        nombre: '[a-zA-Z]+'
+        apellidos: '[1-9]+'
