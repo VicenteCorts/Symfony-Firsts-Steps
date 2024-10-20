@@ -234,12 +234,46 @@ animales:
     controller: App\Controller\HomeController::animales
 ```
 
-## CLASE 418
-### 
+## CLASE 419
+###  Rutas Parámetro Obligatorio
+la ruta se modificaría de la sigueinte manera, y een el controlador deberiamos añadir el parámetro de entrada y añadirlo al return, para poder añadirlo en la vista:
+```html
+RUTA
 
+animales:
+    path: /animales/{nombre}
+    controller: App\Controller\HomeController::animales
+---------------------------------------------
+CONTROLADOR
 
+    public function animales($nombre) {
+        
+        $title = 'Bienvenido a la página de animales';
+        
+        return $this->render('home/animales.html.twig',[
+            'title' => $title,
+            'nombre' => $nombre,
+        ]);
+    }
+---------------------------------------------
+VISTA
 
+<h1>{{ title }}</h1>
+<h2>{{ nombre }}</h2>
+```
+### Parámetro Opcional
+- **Primera Opción**: Sería añadiendo el símbolo "?" al parámetro de la ruta (path: /animales/{nombre?})
+- **Segunda Opción**: Añadiendo en la ruta:
+```html
+animales:
+    path: /animales/{nombre}
+    controller: App\Controller\HomeController::animales
+    defaults: {nombre: 'GATO'} //ESTA LÍNEA
+```
+De este modo generamos un **valor default** para el parámetro en caso de que no exista
 
+## CLASE 420
+###
 
 
 
