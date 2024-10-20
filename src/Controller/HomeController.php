@@ -28,4 +28,9 @@ class HomeController extends AbstractController
             'apellidos' => $apellidos,
         ]);
     }
+    
+    public function redirigir() {
+//        return $this->redirectToRoute('home', array(), 301);
+        return $this->redirect('http://localhost:8000/inicio');
+    }
 }

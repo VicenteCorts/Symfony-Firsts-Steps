@@ -16,3 +16,7 @@ animales:
     requirements:
         nombre: '[a-zA-Z]+'
         apellidos: '[1-9]+'
+        
+redirigir:
+    path: /redirigir
+    controller: App\Controller\HomeController::redirigir

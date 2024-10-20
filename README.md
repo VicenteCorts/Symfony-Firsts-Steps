@@ -299,8 +299,33 @@ https://symfony.com/doc/4.x/routing.html
 
 ## CLASE 421
 ### Redirecciones
-
-
+Cremaos un nuevo método en HomeController:
+```html
+    public function redirigir() {
+        return $this->redirectToRoute('home');
+    }
+```
+- Redigirimos mediante el return al método/ruta **"home"**
+Y en Rutas creamos una nueva ruta para poder enlazar esto:
+```html
+redirigir:
+    path: /redirigir
+    controller: App\Controller\HomeController::redirigir
+```
+### Redirecciones 301
+Muy recomendables de cara a SEO:
+```html
+    public function redirigir() {
+        return $this->redirectToRoute('home', array(), 301);
+    }
+```
+### Otro método para redirecciones
+```html
+    public function redirigir() {
+        return $this->redirect('http://localhost:8000/inicio');
+    }
+```
+**EN CASO DE PROBLEMAS DE CACHÉ** -> borrar **carpeta var/cache** entera
 
 
 
