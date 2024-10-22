@@ -333,10 +333,72 @@ Muy recomendables de cara a SEO:
 
 ## CLASE 423
 ### Plantillas y Bloques
+Creamos una carpeta nueva dentro de templates (layouts) y dentro una nueva plantilla terminada en .html.twig y trabajaremos sobre ella
+- Creamos una estructura básica de html (<!DOCTYPE HTML> (...)
+- Para definir bloques sería d ela sigueinte manera:
+```html
+{% block titulo %} INICIO {% endblock %} - Master en PHP Vicente Corts
+```
+- Al cargar diferentes páginas podemos hacer que el bloque titulo varía su contenido; ahora mismo está definido como "INICIO" pero más tarde podremos cambiarlo
+- Completamos la plantilla para hacer uso de ella
+```html
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            {% block titulo %} INICIO {% endblock %} - Master en PHP Vicente Corts
+        </title>
+    </head>
+    <body>
+        <div id="header">
+            {% block cabecera %}
+                <h1>Cabecera de la plantilla</h1>
+            {% endblock %}
+        </div>
+        <section id="content">
+            {% block contenido %}
+                <p>Contenido default</p>
+            {% endblock %}
+        </section>
+        <footer>
+            Footer default
+        </footer>
+    </body>
+</html>
+```
+- Para usarla, crearemos en otra vista la instrucción **extends** (Modificamos la plantilla animales.html.twig
+```html
+{% extends 'layouts/master.html.twig' %}
+--------------------------------------------
+ANIMALES.HTML.TWIG
 
+{% extends 'layouts/master.html.twig' %}
 
+{% block titulo %}
+    Animales
+{% endblock %}
 
+{% block cabecera %}
+    <h1>Animales</h1>
+{% endblock %}
 
+{% block contenido %}
+    <h1>{{ title }}</h1>
+    <h2>{{ nombre }}</h2>
+    <h2>{{ apellidos }}</h2>
+{% endblock %}
+```
+- Si quisiéramos heredar un bloque además de añadirle algo de contenido sería mediante**{{ parent() }}**:
+```html
+{% block cabecera %}
+    {{ parent() }}
+    <h1>Animales</h1>
+{% endblock %}
+```
+
+## CLASE 424
+### Comentarios y Variables
 
 
 

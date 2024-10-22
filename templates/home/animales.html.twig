@@ -1,3 +1,16 @@
-<h1>{{ title }}</h1>
-<h2>{{ nombre }}</h2>
-<h2>{{ apellidos }}</h2>
+{% extends 'layouts/master.html.twig' %}
+
+{% block titulo %}
+    Animales
+{% endblock %}
+
+{% block cabecera %}
+    {{ parent() }}
+    <h1>Animales</h1>
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ title }}</h1>
+    <h2>{{ nombre }}</h2>
+    <h2>{{ apellidos }}</h2>
+{% endblock %}
