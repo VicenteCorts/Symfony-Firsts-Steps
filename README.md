@@ -327,7 +327,12 @@ Muy recomendables de cara a SEO:
 ```
 **EN CASO DE PROBLEMAS DE CACHÉ** -> borrar **carpeta var/cache** entera
 
+## CLASE 422
+### Introducción a Twig
+(...)
 
+## CLASE 423
+### Plantillas y Bloques
 
 
 
