@@ -421,8 +421,38 @@ Para crear variables sería con {% set nombre = valor %}
 ```
 ## CLASE 425
 ### Definir y mostrar arrays
+En primer lugar crearemos un array en HomeController método: animales para trabajar con él:
+```html
+$animales = array ('perro', 'gato', 'paloma', 'rata');
 
+---
 
+        return $this->render('home/animales.html.twig',[
+            'title' => $title,
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'animales' => $animales,
+        ]);
+```
+Mediante el código **{{ dump(animales) }}** podemos ver el contenido del array que hemos enviado a la plantilla a través del HomeController
+- Para mostrar un elemento concreto pasamos el puesto del array por corchetes: **{{ animales[1] }}**
+- Para trabajar con **arrays asociativos**
+```html
+        $aves = array (
+            'raza' => 'palomo',
+            'loro' => 'pirata',
+            'paloma' => 17,
+            'aguila' => true
+        );
+------------------------------------------
+    {# Trabajar con array asociativo #}
+    {{ dump(aves) }}
+    {{ aves.loro }}
+```
+También podemos concatenar cosas dentro de las claves mediante el uso de la virgulilla 
+```html
+{{ aves.loro ~ ' ' ~ aves.paloma }}
+```
 
 
 

@@ -17,4 +17,13 @@
     #}
     {% set perro = 'Pastor aleman' %}
     <h4>{{ perro }}</h4>
+    
+    {# Trabajar con array #}
+    {{ dump(animales) }}
+    {{ animales[1] }}
+    
+    {# Trabajar con array asociativo #}
+    {{ dump(aves) }}
+    {{ aves.loro ~ ' ' ~ aves.paloma }}
+    
 {% endblock %}
