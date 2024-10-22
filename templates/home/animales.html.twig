@@ -10,7 +10,11 @@
 {% endblock %}
 
 {% block contenido %}
-    <h1>{{ title }}</h1>
-    <h2>{{ nombre }}</h2>
-    <h2>{{ apellidos }}</h2>
+    {#    
+        <h1>{{ title }}</h1>
+        <h2>{{ nombre }}</h2>
+        <h2>{{ apellidos }}</h2>
+    #}
+    {% set perro = 'Pastor aleman' %}
+    <h4>{{ perro }}</h4>
 {% endblock %}

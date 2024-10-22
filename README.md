@@ -398,9 +398,29 @@ ANIMALES.HTML.TWIG
 ```
 
 ## CLASE 424
-### Comentarios y Variables
-
-
+### Pasar Parámetros a nuestra vista
+Ya visto anteriormente (Parámetros previamente definidos en el controlador):
+```html
+<h1>{{ title }}</h1>
+<h2>{{ nombre }}</h2>
+<h2>{{ apellidos }}</h2>
+```
+### Comentarios en Twig
+Ahora veremos como crear **Comentarios** usando "{# (...) #}":
+```html
+{#    <h1>{{ title }}</h1>
+    <h2>{{ nombre }}</h2>
+    <h2>{{ apellidos }}</h2>
+#}
+```
+### Variables en Twig
+Para crear variables sería con {% set nombre = valor %}
+```html
+    {% set perro = 'Pastor aleman' %}
+    <h4>{{ perro }}</h4>
+```
+## CLASE 425
+### Definir y mostrar arrays
 
 
 
