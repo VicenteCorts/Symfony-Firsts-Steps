@@ -453,8 +453,37 @@ También podemos concatenar cosas dentro de las claves mediante el uso de la vir
 ```html
 {{ aves.loro ~ ' ' ~ aves.paloma }}
 ```
+## CLASE 426
+### Estructuras de Control en Twig
+#### IF
+```html
+    {% if aves.paloma == 17 %}
+        <h1> IF COMPLETADO </h1>
+    {% else %}
+        <h2> No hay CONDICION CUMPLIDA </h2>
+    {% endif %}
+```
+#### FOREACH
+```html
+    {% if animales|length >= 0 %}
+        <ul>
+            {% for animal in animales %}
+                <li>
+                    {{ animal }}
+                </li>
+            {%  endfor %}
+        </ul>
+    {% endif %}
+--------------------------------------------
+    {% for i in 0..10 %}
+        {{ i }}
+    {% endfor %}
+```
+- El ".." indica el rango
+- Endfor tiene variantes -> revisar documentación
 
-
+## CLASE 427
+### Starts End
 
 
 
