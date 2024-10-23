@@ -484,7 +484,16 @@ También podemos concatenar cosas dentro de las claves mediante el uso de la vir
 
 ## CLASE 427
 ### Starts End
-
+```html
+    {# Starts Ends#}
+    {% if aves.raza starts with 'p' %}
+        <h1>Empieza por P</h1>
+    {% endif %}
+    
+    {% if aves.raza ends with 'o' %}
+        <h1>Termina en O</h1>
+    {% endif %}
+```
 
 
 

@@ -48,4 +48,13 @@
         {{ i }}<br>
     {% endfor %}
 
+    {# Starts Ends#}
+    {% if aves.raza starts with 'p' %}
+        <h1>Empieza por P</h1>
+    {% endif %}
+    
+    {% if aves.raza ends with 'o' %}
+        <h1>Termina en O</h1>
+    {% endif %}
+    
 {% endblock %}
