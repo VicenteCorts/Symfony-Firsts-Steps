@@ -599,7 +599,8 @@ Una vez que tenemos nuestra exrtensión hecha, debemos registrarla dentro de los
     {{ 12|multiplicar|raw }}
 ```
 ## CLASE 432
-###
+### Listar Rutas
+En consola mediante el comando: **php bin/console debug:router**
 
 
 
