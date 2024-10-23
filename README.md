@@ -521,6 +521,36 @@ extrae el número mayor de un array
 ```
 ## CLASE 429
 ### Includes
+Creamos una nueva carpeta "partials" dentro de templates para dividir el código que tenemos hasta ahora.
+```html
+    {{ include('partials/funciones.html.twig') }}
+
+{# INCLUSO PODEMOS PASAR PARÁMETROS: #}
+    {{ include('partials/funciones.html.twig', {'nombre':'Vicente Corts León'}) }}
+```
+## CLASE 430
+### Filtros por Defecto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
