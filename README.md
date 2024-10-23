@@ -496,7 +496,7 @@ También podemos concatenar cosas dentro de las claves mediante el uso de la vir
 ```
 ## CLASE 428
 ### Funciones predefinidas en Twig
-https://twig.symfony.com/doc/  --> Nos dirigimos a la parte de filtros,functions, etc...
+https://twig.symfony.com/doc/  --> Nos dirigimos a la parte de functions.
 #### min
 extrae el número minimo de un array
 ```html
@@ -530,9 +530,18 @@ Creamos una nueva carpeta "partials" dentro de templates para dividir el código
 ```
 ## CLASE 430
 ### Filtros por Defecto
-
-
-
+Pipes o tuberías que nos permiten modificar el resultado final de una variable. https://twig.symfony.com/doc/  --> Filtros
+```html
+    {# Filtros #}
+    {{ animales|length }}
+    {% set email = '  email@email.com ' %}
+    {{ email|trim }}
+    {{ email|upper }}
+    {{ email|lower }}
+```
+Existen muchos filtros, ahí dejo un par de ellos con funcionalidades básicas.
+## CLASE 431
+### Crear Extensiones
 
 
 

@@ -57,6 +57,15 @@
         <h1>Termina en O</h1>
     {% endif %}
 
+    {# Includes #}    
     {{ include('partials/funciones.html.twig', {'nombre':'Vicente Corts León'}) }}
+    <hr>
+    
+    {# Filtros #}
+    {{ animales|length }}
+    {% set email = '  email@email.com ' %}
+    {{ email|trim }}
+    {{ email|upper }}
+    {{ email|lower }}
     
 {% endblock %}
