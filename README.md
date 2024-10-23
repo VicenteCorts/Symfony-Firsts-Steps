@@ -636,7 +636,23 @@ Nos dirigimos a la carpeta src/Entity -> aqui es donde se guardarán las Entidad
 ## CLASE 435
 ### Generar Entidades desde Symfony
 Este método es más recomendable y el que usan todas la guías de Symfony y la propia documentación Oficial (https://symfony.com/doc/6.4/doctrine.html#configuring-the-database)
+- Para crear entidades mediante Symfony nos dirigiremos a la consola con el comando: **php bin/console make:entity nombre**
+- Creamos la entidad "Usuario"
+- Al ejecutar el comando, nos crea el archivo de la propia entidad y un repositorio en el que añadir métodos complejos
+- Continuamos con la creación de la entidad por consola añadiendo campos a la entidad (que posteriormente mediante el ORM pasarán a ser columnas de la BBDD)
 
+En caso de que la Entidad no tenga incluidos los setters y getters debemos escribir por consola **php bin/console make:entity --regenerate**
+(...)
+
+## CLASE 436
+### Generar tablas de entidades
+https://symfony.com/doc/6.4/doctrine.html#migrations-creating-the-database-tables-schema
+- Primero ejecutarmeos el comando: **php bin/console doctrine:migrations:diff** para que ejecute las migraciones necesarias en base a una comparación con la BBDD. Solo creará migraciones de aquellas tablas que no estén en la BBDD. También puede crearse el archivo de la migración mediante ****php bin/console make:migration****
+- Ahora debemos ejecutar las migraciones para que estas queden plasmadas en la BBDD: **php bin/console doctrine:migrations:migrate**
+
+
+## CLASE 437
+### Hacer cambios en Entidades
 
 
 
