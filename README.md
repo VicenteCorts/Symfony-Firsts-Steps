@@ -604,6 +604,7 @@ En consola mediante el comando: **php bin/console debug:router**
 
 ## CLASE 433
 ### Conexión a la BBDD
+https://symfony.com/doc/6.4/doctrine.html#configuring-the-database
 - Nos dirigimos al fichero .env de la raíz del proyecto
 - Entre las variables que encontramos existe **APP_ENV=dev** -> Esta se puede alternar entre dev(desarollo) o prod (producción)
 - Otra de las variables es **DATABASE_URL** cuyo contenido permite conectarnos a la base de datos
@@ -617,6 +618,27 @@ En consola mediante el comando: **php bin/console debug:router**
 > septima parte, charset -> &charset=utf8"
 
 En mi caso, sería así: ** DATABASE_URL="mysql://root@127.0.0.1:3306/symfony_db?serverVersion=8.2.0&charset=utf8mb4"**
+- A continuación escribimos por consola: **php bin/console doctrine:databas:create** para crear la BBDD
+
+## CLASE 434
+### Generar Entidades desde la BBDD
+
+#### **DEPRECATED**
+
+Nos dirigimos a la carpeta src/Entity -> aqui es donde se guardarán las Entidades. Podemos hacerlas a mano o generando entidades a través de la BBDD
+- Creamos una tabla en la BBDD (animales)
+- Nos dirigimos a la consola -> **Debemos pasar la BBDD a código compatible con Symfony y Doctrine**
+- **php bin/console doctrine:mapping:convert --from-database yml ./src/Entity**
+
+
+#### **DEPRECATED**
+
+## CLASE 435
+### Generar Entidades desde Symfony
+Este método es más recomendable y el que usan todas la guías de Symfony y la propia documentación Oficial (https://symfony.com/doc/6.4/doctrine.html#configuring-the-database)
+
+
+
 
 
 
