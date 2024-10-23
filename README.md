@@ -542,10 +542,64 @@ Pipes o tuberías que nos permiten modificar el resultado final de una variable.
 Existen muchos filtros, ahí dejo un par de ellos con funcionalidades básicas.
 ## CLASE 431
 ### Crear Extensiones
+Podemos crear nuestro propio filtro o helper para que ejecute una función específica que nosotros queramos
+- Para ello crearemos una carpeta llamada "Twig" dentro de la carpeta raiz src
+- nos dirigimos a la consola y ejecutamos el comando **php bin/console list**
+- El resultado nos muestra que podmeos crear la extensión-twig directamente por consola
+- **php bin/console make:twig-extension "nombre"**
+- Por defecto nos genera una clase MiFiltroExtension con dos carpetas
+- Nos dirigimos a la otra carpeta creada "Runtime"
+- Creamos un tercer método llamado **multiplicar** a través del cual haremos qe se multiplique una variable
+```html
+    public function multiplicar($numero) {
+        $tabla = "<h1>Tabla del $numero</h1>";
+        for ($i = 0; $i <= 10; $i++) {
+            $tabla .= "$i X $numero = " . ($i * $numero) . "<br/>";
+        }
 
+        return $tabla;
+    }
+```
+- En el archivo Extension/MiFiltroExtension.php
+- sustituimos 'doSomething' de los métodos anteriores por 'multiplicar' (nuestro nuevo método)
+- igualmente sustituimos los nombres de la función en los otros métodos a **multiplicar**
+```html
+class MiFiltroExtension extends AbstractExtension
+{
+    public function getFilters(): array
+    {
+        return [
+            // If your filter generates SAFE HTML, you should add a third
+            // parameter: ['is_safe' => ['html']]
+            // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
+            new TwigFilter('multiplicar', [MiFiltroRuntime::class, 'multiplicar']),
+        ];
+    }
 
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('multiplicar', [MiFiltroRuntime::class, 'multiplicar']),
+        ];
+    }
+}
+```
+Una vez que tenemos nuestra exrtensión hecha, debemos registrarla dentro de los servicios de Symfony (config/services.yaml)
+```html
+    App\Twig\Extension\:
+        resource: '../src/Twig/Extension'
+        tags: ['twig.extension']
+```
+¡MUCHO CUIDADO CON LOS ESPACIOS Y TABULACIONES!
 
-
+- Añadimos por último al archivo animales.html.twig código para hacer uso de la nueva extensión
+```html
+    {# Filtros #}
+    {{ multiplicar(4)|raw }}
+    {{ 12|multiplicar|raw }}
+```
+## CLASE 432
+###
 
 
 
