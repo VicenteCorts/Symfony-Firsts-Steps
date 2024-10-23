@@ -494,9 +494,33 @@ También podemos concatenar cosas dentro de las claves mediante el uso de la vir
         <h1>Termina en O</h1>
     {% endif %}
 ```
-
-
-
+## CLASE 428
+### Funciones predefinidas en Twig
+https://twig.symfony.com/doc/  --> Nos dirigimos a la parte de filtros,functions, etc...
+#### min
+extrae el número minimo de un array
+```html
+{{ min ([2,4,6,1,8,12]) }}
+```
+#### max
+extrae el número mayor de un array
+```html
+{{ max ([2,4,6,1,8,12]) }}
+```
+#### random
+```html
+{{ random(animales) }}
+```
+#### range
+- En el siguiente ejemplo recorrerá del 0 al 100 en rangos de 12 en 12:
+```html
+    {% for i in range(0,100, 12) %}
+        {{ i }}
+        <br>
+    {% endfor %}
+```
+## CLASE 429
+### Includes
 
 
 

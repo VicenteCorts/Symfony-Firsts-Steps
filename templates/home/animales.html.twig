@@ -43,7 +43,7 @@
             {%  endfor %}
         </ul>
     {% endif %}
-    
+
     {% for i in 0..10 %}
         {{ i }}<br>
     {% endfor %}
@@ -52,9 +52,21 @@
     {% if aves.raza starts with 'p' %}
         <h1>Empieza por P</h1>
     {% endif %}
-    
+
     {% if aves.raza ends with 'o' %}
         <h1>Termina en O</h1>
     {% endif %}
-    
+
+    {# Funciones Predefinidas #}
+    <h1>Funciones</h1>
+    {{ min ([2,4,6,1,8,12]) }}
+    <br>
+    {{ max ([2,4,6,1,8,12]) }}
+    <br>
+    {{ random(animales) }}
+    <br>
+    {% for i in range(0,100, 12) %}
+        {{ i }}
+        <br>
+    {% endfor %}
 {% endblock %}
