@@ -647,16 +647,52 @@ En caso de que la Entidad no tenga incluidos los setters y getters debemos escri
 ## CLASE 436
 ### Generar tablas de entidades
 https://symfony.com/doc/6.4/doctrine.html#migrations-creating-the-database-tables-schema
-- Primero ejecutarmeos el comando: **php bin/console doctrine:migrations:diff** para que ejecute las migraciones necesarias en base a una comparación con la BBDD. Solo creará migraciones de aquellas tablas que no estén en la BBDD. También puede crearse el archivo de la migración mediante ****php bin/console make:migration****
+- Primero ejecutarmeos el comando: **php bin/console doctrine:migrations:diff** para que ejecute las migraciones necesarias en base a una comparación con la BBDD. Solo creará migraciones de aquellas tablas que no estén en la BBDD. También puede crearse el archivo de la migración mediante **php bin/console make:migration**
 - Ahora debemos ejecutar las migraciones para que estas queden plasmadas en la BBDD: **php bin/console doctrine:migrations:migrate**
 
 
 ## CLASE 437
+### ERROR POR MI CUENTA
+> Crear código de una tabla ya existente en la BBDD:
+> En primer lugar, hacer mención al comando **php bin/console doctrine:mapping:import APP\Entity annotation --path=src/Entity**, el cual es usado por Victor para extraer una tabla ya creada en la BBDD al formato ORM para poder trabajar con ella en Symfony directamente. A mi me da fallos.
+> - Los fallos son por "doctrine:mapping..." is not defined
+> - Aun isntalanto los paquetes que me dice ChatGPT no da resultado (composer require doctrine/orm || composer require doctrine/doctrine-bundle | composer require doctrine/doctrine-migrations-bundle)
+> - Finalmente me dice que puede que me **faltan extensiones en php.ini (php -m | grep pdo_mysql)** - Pero estas no las he instalado.
+> - Continúo sin hacer esto.
+> 
+> https://symfony.com/doc/6.4/doctrine/reverse_engineering.html  (A hacerlo manualmente) -> Caution The doctrine:mapping:import command used to generate Doctrine entities from existing databases was deprecated by Doctrine in 2019 and there's no replacement for it. Instead, you can use the make:entity command from Symfony Maker Bundle to help you generate the code of your Doctrine entities. This command requires manual supervision because it doesn't generate entities from existing databases.
+
 ### Hacer cambios en Entidades
+Decidimos cambiar el nombre de la entidad "Animales" a "Animal" -> Cambiamos manualmente tanto el archvio de la Entidad como del Repository que se crea con ella; igualmente modificamos el nombre de las clases que incluyen estos archivos.
+- Tras esto, generamos una migración: **php bin/console make:migration**
+- Luego la ejecutamos: **php bin/console doctrine:migrations:migrate**
+- Finalmente en la BBDD se cambia el nombre de la tabla Animales por "Animal" (TODO OK)
 
+### Añadir nuevo campo a una Entidad ya existente
+```html
+$ php bin/console make:entity
 
+Class name of the entity to create or update
+> Animal
 
+New property name (press <return> to stop adding fields):
+> cantidad
 
+Field type (enter ? to see all types) [string]:
+> int
+
+Can this field be null in the database (nullable) (yes/no) [no]:
+> no
+
+New property name (press <return> to stop adding fields):
+>
+(press enter again to finish)
+```
+De este modo nos añade el código para incluir este nuevo atributo, así como sus getters y setters.
+- Ahora debemos, una vez más, crear la migración y ejecutarla.
+
+## CLASE 438
+###
 
 
 
