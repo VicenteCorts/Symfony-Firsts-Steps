@@ -602,6 +602,21 @@ Una vez que tenemos nuestra exrtensión hecha, debemos registrarla dentro de los
 ### Listar Rutas
 En consola mediante el comando: **php bin/console debug:router**
 
+## CLASE 433
+### Conexión a la BBDD
+- Nos dirigimos al fichero .env de la raíz del proyecto
+- Entre las variables que encontramos existe **APP_ENV=dev** -> Esta se puede alternar entre dev(desarollo) o prod (producción)
+- Otra de las variables es **DATABASE_URL** cuyo contenido permite conectarnos a la base de datos
+	- DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
+> primera parte, tipo de BBDD ->"postgesql://...
+> segunda parte, usuario de la base de datos -> app: (temrinado en dos puntos, en caso de que no haya contraseña omotir esos dos puntos)
+> tercera parte, contraseña-> !ChangeMe!@ (el @ es necesario ponerlo independientemente de que haya o no contraseña)
+> cuarta parte, dirección url -> 127.0.0.1:5432/
+> quinta parte, nombre de la BBDD -> app?
+> sexta parte, versión del server -> serverVersion=16
+> septima parte, charset -> &charset=utf8"
+
+En mi caso, sería así: ** DATABASE_URL="mysql://root@127.0.0.1:3306/symfony_db?serverVersion=8.2.0&charset=utf8mb4"**
 
 
 
