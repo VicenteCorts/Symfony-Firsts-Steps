@@ -75,7 +75,6 @@ class AnimalController extends AbstractController {
         //Cargar doctrine
         //Cargar entityManager
         //Ya lo hacemos en los paréntesis de la función
-        
         //Cargar Repo Animal
         $em = $entityManager->getRepository(Animal::class);
 
@@ -87,21 +86,40 @@ class AnimalController extends AbstractController {
             $message = 'No existe un registro en la tabla animal con el id: ' . $id;
         } else {
             //Asignarle valores al objeto capturado
-            $animal->setTipo('Koala '.$id);
+            $animal->setTipo('Koala ' . $id);
             $animal->setColor('Amarillo');
             $animal->setRaza('de la Patagonia');
             $animal->setCantidad(13);
-            
+
             //Persistir en doctrine - No es necesario para actualizaciones
             $entityManager->persist($animal);
-            
+
             //Guardar en la BBDD
             $entityManager->flush();
-            
-            $message = "El animal ha sido actualizado id: ". $animal->getId();
+
+            $message = "El animal ha sido actualizado id: " . $animal->getId();
         }
 
         //Respuesta
+        return new Response($message);
+    }
+
+    public function delete(EntityManagerInterface $entityManager, Animal $animal): Response {
+        //Cargamos el entityManaget en los parámetros de la función
+
+
+        if ($animal && is_object($animal)) {
+            //Eliminamos de doctrine - de la memoria de objetos en la caché 
+            $entityManager->remove($animal);
+            //Ejecutamos el delete de la BBDD
+            $entityManager->flush();
+            //Respuesta final
+            $message = 'Animal borrado correctamente';
+        } else {
+            //Respuesta final
+            $message = 'Animal no encontrado';
+        }
+            
         return new Response($message);
     }
 }

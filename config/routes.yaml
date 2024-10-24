@@ -36,3 +36,7 @@ animal_detail:
 animal_update:
     path: /animal/update/{id}
     controller: App\Controller\AnimalController::update
+    
+animal_delete:
+    path: /animal/delete/{id}
+    controller: App\Controller\AnimalController::delete

@@ -908,9 +908,37 @@ animal_update:
 
 ## CLASE 445
 ### Eliminar Registro de la BBDD
+- https://symfony.com/doc/current/doctrine.html#deleting-an-object
+Creamos un método delete dentro del Controlador de AnimalController
+```html
+    public function delete(EntityManagerInterface $entityManager, Animal $animal): Response {
+        //Cargamos el entityManaget en los parámetros de la función
 
 
+        if ($animal && is_object($animal)) {
+            //Eliminamos de doctrine - de la memoria de objetos en la caché 
+            $entityManager->remove($animal);
+            //Ejecutamos el delete de la BBDD
+            $entityManager->flush();
+            //Respuesta final
+            $message = 'Animal borrado correctamente';
+        } else {
+            //Respuesta final
+            $message = 'Animal no encontrado';
+        }
+            
+        return new Response($message);
+    }
+```
+Creamos su ruta:
+```html
+animal_delete:
+    path: /animal/delete/{id}
+    controller: App\Controller\AnimalController::delete
+```
 
+## CLASE 446
+### 
 
 
 
