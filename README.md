@@ -692,17 +692,52 @@ De este modo nos añade el código para incluir este nuevo atributo, así como s
 - Ahora debemos, una vez más, crear la migración y ejecutarla.
 
 ## CLASE 438
-###
+### Guardar en la BBDD
+https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+- Comenzaremos por crearnos un nuevo controlador para Animal **php bin/console make:controller AnimalController**
+- Con esto nos creará el controlador dentro de src/controller y una plantilla index.html.twig dentro de templates/animal
+- Aunque en el propio controlador nos crean una ruta default, nos dirigiremos a config/routes.yaml y crearemos una ruta adicional
+```html
+animal_index:
+    path: /animal/index
+    controller: App\Controller\AnimalController::index
+```
+Ahora crearemos un método dentro de AnimalController "save" para añadir registros a la BBDD
+- Deberemos cargar **use Symfony\Component\HttpFoundation\Response;** en caso de que no esté por defecto
+- Igualmente debemos cargar el modelo; es decir la Entidad Animal: **use App\Entity\Animal;**
+- Para poder añadir registros a la BBDD necesitamos trabajar con el "EntityManager", incluimos **use Doctrine\ORM\EntityManagerInterface;**
+- Luego en el método save deberemos incluirlo:
+```html
+    public function save(EntityManagerInterface $entityManager): Response
+    {
+        //Crear el Objeto Animal
+        $animal = new Animal();
+        $animal->setTipo(Perro);
+        $animal->setColor(azul);
+        $animal->setRaza(husky);
+        $animal->setCantidad(27);
+                
+        //Invocar doctrine para que guarde el objeto
+        $entityManager->persist($animal);
+        //Ejecutar orden para que doctrine guarde el objeto
+        $entityManager->flush();
+        
+        //Respuesta
+        return new Response('Nuevo Animal guardado con el id'.$animal->getId());
+    }
+```
+- Importante la forma en la que se declara la función y las últimas líneas de codigo para hacer el insert
+Igualmente, creamos una ruta para el método save en routes.yaml:
+```html
+animal_save:
+    path: /animal/save
+    controller: App\Controller\AnimalController::save
+```
+Para comprobar que todo ha funcionado correctamente podemos crear un SELECT de la tabla modificada por consola: **php bin/console dbal:run-sql 'SELECT * FROM animal'**
+- **$entityManager->flush();** -> Whether you're creating or updating objects, the workflow is always the same: Doctrine is smart enough to know if it should INSERT or UPDATE your entity.
 
-
-
-
-
-
-
-
-
-
+## CLASE 439
+### Comandos SQL
 
 
 
