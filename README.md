@@ -971,8 +971,21 @@ Otra opción sería:
                 ->orderBy('a.id', 'DESC')
                 ->getQuery();
 ```
-
-
+## CLASE 447
+### DQL
+DQL: pseudo lenguaje SQL - Doctrine SQL
+- Lenguaje muy similar a SQL pero orientado a objetos
+- Para declararlo se seguiría el siguiente patrón:
+```html
+        //DQL CLASE 447
+        $dql = "SELECT a FROM App\Entity\Animal a WHERE a.color = 'amarillo'";
+                
+        $query = $entityManager->createQuery($dql);
+        
+        var_dump($query->getResult());
+```
+## CLASE 448
+### SQL en Symfony 4 y 5 (?)
 
 
 

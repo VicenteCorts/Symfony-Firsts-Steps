@@ -36,6 +36,7 @@ class AnimalController extends AbstractController {
 //        ]);
 
         
+        
         //QUERY BUILDER CLASE 446
         $qb = $repository->createQueryBuilder('a')
 //                ->andWhere("a.color = :color")
@@ -45,7 +46,16 @@ class AnimalController extends AbstractController {
         
         $resultset = $qb->execute();
         
-        var_dump($resultset);
+        
+     
+        //DQL CLASE 447
+        $dql = "SELECT a FROM App\Entity\Animal a WHERE a.color = 'amarillo'";
+                
+        $query = $entityManager->createQuery($dql);
+        
+        var_dump($query->getResult());
+        
+        
         
         return $this->render('animal/index.html.twig', [
                     'controller_name' => 'AnimalController',
