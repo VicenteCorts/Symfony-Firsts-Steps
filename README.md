@@ -733,13 +733,13 @@ animal_save:
     path: /animal/save
     controller: App\Controller\AnimalController::save
 ```
-Para comprobar que todo ha funcionado correctamente podemos crear un SELECT de la tabla modificada por consola: **php bin/console dbal:run-sql 'SELECT * FROM animal'**
 - **$entityManager->flush();** -> Whether you're creating or updating objects, the workflow is always the same: Doctrine is smart enough to know if it should INSERT or UPDATE your entity.
 
 ## CLASE 439
 ### Comandos SQL
+Para comprobar que todo ha funcionado correctamente podemos crear un SELECT de la tabla modificada por consola: **php bin/console dbal:run-sql 'SELECT * FROM animal'**
 
-
-
+## CLASE 440
+###
 
 
