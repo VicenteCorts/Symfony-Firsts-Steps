@@ -741,6 +741,7 @@ Para comprobar que todo ha funcionado correctamente podemos crear un SELECT de l
 
 ## CLASE 440
 ### Find (Extraer registro de la BBDD)
+- https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
 Creamos una ruta:
 ```html
 animal_detail:
@@ -764,5 +765,61 @@ Creamos un método "animal" en AnimalController
     }
 ```
 ## CLASE 441
-### 
+### Find All
+Modificamos el método index de Animalcontroller:
+```html
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        //Cargar Repositorio 
+        $repository = $entityManager->getRepository(Animal::class);
+        
+        //Consulta find-all
+        $animales = $repository->findAll();
+                
+                
+        return $this->render('animal/index.html.twig', [
+            'controller_name' => 'AnimalController',
+            'animales' => $animales,
+        ]);
+    }
+```
+Nos dirigimos a la vista y la modificamos para poder mostrar el resultado del método anterior (el índice 'animales' que se envía por el return
+```html
+    <ul>
+    {%for animal in animales %}
+        <li>
+            <ul>
+                <li>{{ animal.id }}</li>
+                <li>{{ animal.tipo }}</li>
+                <li>{{ animal.color }}</li>
+                <li>{{ animal.raza }}</li>
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+```
+## CLASE 442
+### Tipos de Find
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

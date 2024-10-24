@@ -11,10 +11,18 @@ use App\Entity\Animal;
 class AnimalController extends AbstractController
 {
     #[Route('/animal', name: 'app_animal')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        //Cargar Repositorio 
+        $repository = $entityManager->getRepository(Animal::class);
+        
+        //Consulta find-all
+        $animales = $repository->findAll();
+                
+                
         return $this->render('animal/index.html.twig', [
             'controller_name' => 'AnimalController',
+            'animales' => $animales,
         ]);
     }
     
