@@ -853,7 +853,7 @@ https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-ent
 - Comentamos el contenido del método y modificamos
 - Para conseguir de manera automática un objeto de la BBDD haremos lo siguiente:
 ```html
-    public function animal(EntityManagerInterface $entityManager, Animal $animal):Response 
+    public function animal(Animal $animal):Response 
     {
         return new Response('El animal con ese id es: '. $animal->getTipo());
     }
@@ -861,8 +861,53 @@ https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-ent
 Al cambiar el parámetro $id por $animal, Doctrine reconoce directamente nuestra intención y hace una call al objeto, para ello solo debemos pasar por la url el número del 1 del objeto al que qeremos qe haga referencia
 
 ## CLASE 444
-### 
+### Actualizar Registros
+- https://symfony.com/doc/current/doctrine.html#updating-an-object
+Creamos un nuevo método "update":
+```html
+    public function update(EntityManagerInterface $entityManager, int $id): Response {
+        //Cargar doctrine
+        //Cargar entityManager
+        //Ya lo hacemos en los paréntesis de la función
+        
+        //Cargar Repo Animal
+        $em = $entityManager->getRepository(Animal::class);
 
+        //Find para conseguir el objeto
+        $animal = $em->find($id);
+
+        //Comprobar si el bojeto llega
+        if (!$animal) {
+            $message = 'No existe un registro en la tabla animal con el id: ' . $id;
+        } else {
+            //Asignarle valores al objeto capturado
+            $animal->setTipo('Koala '.$id);
+            $animal->setColor('Amarillo');
+            $animal->setRaza('de la Patagonia');
+            $animal->setCantidad(13);
+            
+            //Persistir en doctrine - No es necesario para actualizaciones
+            $entityManager->persist($animal);
+            
+            //Guardar en la BBDD
+            $entityManager->flush();
+            
+            $message = "El animal ha sido actualizado id: ". $animal->getId();
+        }
+
+        //Respuesta
+        return new Response($message);
+    }
+```
+Creamos la ruta para el método update:
+```html
+animal_update:
+    path: /animal/update/{id}
+    controller: App\Controller\AnimalController::update
+```
+
+## CLASE 445
+### Eliminar Registro de la BBDD
 
 
 

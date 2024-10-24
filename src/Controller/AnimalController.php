@@ -8,17 +8,16 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Animal;
 
-class AnimalController extends AbstractController
-{
+class AnimalController extends AbstractController {
+
     #[Route('/animal', name: 'app_animal')]
-    public function index(EntityManagerInterface $entityManager): Response
-    {
+    public function index(EntityManagerInterface $entityManager): Response {
         //Cargar Repositorio 
         $repository = $entityManager->getRepository(Animal::class);
-        
+
         //Consulta find-all
         $animales = $repository->findAll();
-        
+
 //        //find donde se cumple la condición tipo = perro
 //        $animales = $repository->findBy([
 //            'tipo' => 'Perro'
@@ -35,33 +34,31 @@ class AnimalController extends AbstractController
 //        ], [
 //            'id' => 'DESC'
 //        ]);
-                
+
         return $this->render('animal/index.html.twig', [
-            'controller_name' => 'AnimalController',
-            'animales' => $animales,
+                    'controller_name' => 'AnimalController',
+                    'animales' => $animales,
         ]);
     }
-    
-    public function save(EntityManagerInterface $entityManager): Response
-    {
+
+    public function save(EntityManagerInterface $entityManager): Response {
         //Crear el Objeto Animal
         $animal = new Animal();
         $animal->setTipo('Perro');
         $animal->setColor('azul');
         $animal->setRaza('husky');
         $animal->setCantidad(27);
-                
+
         //Invocar doctrine para que guarde el objeto
         $entityManager->persist($animal);
         //Ejecutar orden para que doctrine guarde el objeto
         $entityManager->flush();
-        
+
         //Respuesta
-        return new Response('Nuevo Animal guardado con el id: '.$animal->getId());
+        return new Response('Nuevo Animal guardado con el id: ' . $animal->getId());
     }
-    
-    public function animal(EntityManagerInterface $entityManager, /*int $id*/ Animal $animal):Response 
-    {
+
+    public function animal(Animal $animal): Response {
 //        //Cargar Repositorio y Consulta "find"
 //        $animal_repo = $entityManager->getRepository(Animal::class)->find($id);
 //        
@@ -71,6 +68,40 @@ class AnimalController extends AbstractController
 //            );
 //        }
 //
-        return new Response('El animal con ese id es: '. $animal->getTipo());
+        return new Response('El animal con ese id es: ' . $animal->getTipo());
+    }
+
+    public function update(EntityManagerInterface $entityManager, int $id): Response {
+        //Cargar doctrine
+        //Cargar entityManager
+        //Ya lo hacemos en los paréntesis de la función
+        
+        //Cargar Repo Animal
+        $em = $entityManager->getRepository(Animal::class);
+
+        //Find para conseguir el objeto
+        $animal = $em->find($id);
+
+        //Comprobar si el bojeto llega
+        if (!$animal) {
+            $message = 'No existe un registro en la tabla animal con el id: ' . $id;
+        } else {
+            //Asignarle valores al objeto capturado
+            $animal->setTipo('Koala '.$id);
+            $animal->setColor('Amarillo');
+            $animal->setRaza('de la Patagonia');
+            $animal->setCantidad(13);
+            
+            //Persistir en doctrine - No es necesario para actualizaciones
+            $entityManager->persist($animal);
+            
+            //Guardar en la BBDD
+            $entityManager->flush();
+            
+            $message = "El animal ha sido actualizado id: ". $animal->getId();
+        }
+
+        //Respuesta
+        return new Response($message);
     }
 }
