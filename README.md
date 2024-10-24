@@ -938,9 +938,39 @@ animal_delete:
 ```
 
 ## CLASE 446
-### 
-
-
+### Query Builder
+- https://symfony.com/doc/current/doctrine.html#querying-for-objects-the-repository
+- https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/query-builder.html#the-querybuilder
+Los querybuilders nos permiten hacer querys más elaboradas; para ello nos ubicaremos dentro del método index de AnimalController
+```html
+        //QUERY BUILDER CLASE 446
+        $qb = $repository->createQueryBuilder('a')
+                ->andWhere("a.color ='Amarillo'")
+                ->getQuery();
+        
+        $resultset = $qb->execute();
+        
+        var_dump($resultset);
+```
+También puede ejecutarse de la siguiente forma:
+```html
+        //QUERY BUILDER CLASE 446
+        $qb = $repository->createQueryBuilder('a')
+                ->andWhere("a.color = :color")
+                ->setParameter('color', 'amarillo')
+                ->getQuery();
+        
+        $resultset = $qb->execute();
+        
+        var_dump($resultset);
+```
+Otra opción sería:
+```html
+        //QUERY BUILDER CLASE 446
+        $qb = $repository->createQueryBuilder('a')
+                ->orderBy('a.id', 'DESC')
+                ->getQuery();
+```
 
 
 

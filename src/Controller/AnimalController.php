@@ -35,6 +35,18 @@ class AnimalController extends AbstractController {
 //            'id' => 'DESC'
 //        ]);
 
+        
+        //QUERY BUILDER CLASE 446
+        $qb = $repository->createQueryBuilder('a')
+//                ->andWhere("a.color = :color")
+//                ->setParameter('color', 'amarillo')
+                ->orderBy('a.id', 'DESC')
+                ->getQuery();
+        
+        $resultset = $qb->execute();
+        
+        var_dump($resultset);
+        
         return $this->render('animal/index.html.twig', [
                     'controller_name' => 'AnimalController',
                     'animales' => $animales,
