@@ -800,8 +800,54 @@ Nos dirigimos a la vista y la modificamos para poder mostrar el resultado del m�
 ```
 ## CLASE 442
 ### Tipos de Find
+https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
+- Ejemplos empleados
+```html
+        //find donde se cumple la condición tipo = perro
+        $animales = $repository->findBy([
+            'tipo' => 'Perro'
+        ]);
+        
+        //find donde se cumple la condición tipo = perro Pero solo saca la priemra coincidencia
+        $animales = $repository->findOneBy([
+            'tipo' => 'Perro'
+        ]);
+        
+        //find donde se cumple la condición tipo = perro && Ordenación descendente
+        $animales = $repository->findBy([
+            'tipo' => 'Perro'
+        ], [
+            'id' => 'DESC'
+        ]);
+```
+Revisando la docuemtnación encontramos más ejemplos de Find:
+```html
+$repository = $entityManager->getRepository(Product::class);
 
+// look for a single Product by its primary key (usually "id")
+$product = $repository->find($id);
 
+// look for a single Product by name
+$product = $repository->findOneBy(['name' => 'Keyboard']);
+// or find by name and price
+$product = $repository->findOneBy([
+    'name' => 'Keyboard',
+    'price' => 1999,
+]);
+
+// look for multiple Product objects matching the name, ordered by price
+$products = $repository->findBy(
+    ['name' => 'Keyboard'],
+    ['price' => 'ASC']
+);
+
+// look for *all* Product objects
+$products = $repository->findAll();
+```
+- Primero se carga el repositorio y despues se emplean los diferentes ejemplos de find con el objeto "product"
+
+## CLASE 443
+###
 
 
 

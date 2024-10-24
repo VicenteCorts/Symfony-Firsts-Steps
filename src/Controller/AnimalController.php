@@ -18,7 +18,23 @@ class AnimalController extends AbstractController
         
         //Consulta find-all
         $animales = $repository->findAll();
-                
+        
+//        //find donde se cumple la condición tipo = perro
+//        $animales = $repository->findBy([
+//            'tipo' => 'Perro'
+//        ]);
+//        
+//        //find donde se cumple la condición tipo = perro Pero solo saca la priemra coincidencia
+//        $animales = $repository->findOneBy([
+//            'tipo' => 'Perro'
+//        ]);
+//        
+//        //find donde se cumple la condición tipo = perro && Ordenación descendente
+//        $animales = $repository->findBy([
+//            'tipo' => 'Perro'
+//        ], [
+//            'id' => 'DESC'
+//        ]);
                 
         return $this->render('animal/index.html.twig', [
             'controller_name' => 'AnimalController',
