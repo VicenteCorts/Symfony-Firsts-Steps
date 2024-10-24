@@ -847,7 +847,28 @@ $products = $repository->findAll();
 - Primero se carga el repositorio y despues se emplean los diferentes ejemplos de find con el objeto "product"
 
 ## CLASE 443
-###
+### Conseguir Objeto Automático
+https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver
+- Nos dirigimos al método animal
+- Comentamos el contenido del método y modificamos
+- Para conseguir de manera automática un objeto de la BBDD haremos lo siguiente:
+```html
+    public function animal(EntityManagerInterface $entityManager, Animal $animal):Response 
+    {
+        return new Response('El animal con ese id es: '. $animal->getTipo());
+    }
+```
+Al cambiar el parámetro $id por $animal, Doctrine reconoce directamente nuestra intención y hace una call al objeto, para ello solo debemos pasar por la url el número del 1 del objeto al que qeremos qe haga referencia
+
+## CLASE 444
+### 
+
+
+
+
+
+
+
 
 
 

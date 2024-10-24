@@ -60,17 +60,17 @@ class AnimalController extends AbstractController
         return new Response('Nuevo Animal guardado con el id: '.$animal->getId());
     }
     
-    public function animal(EntityManagerInterface $entityManager, int $id):Response 
+    public function animal(EntityManagerInterface $entityManager, /*int $id*/ Animal $animal):Response 
     {
-        //Cargar Repositorio y Consulta "find"
-        $animal_repo = $entityManager->getRepository(Animal::class)->find($id);
-        
-        if (!$animal_repo) {
-            throw $this->createNotFoundException(
-                'No existe un registro en la tabla animal con el id: '.$id
-            );
-        }
-
-        return new Response('El animal con ese id es: '. $animal_repo->getTipo());
+//        //Cargar Repositorio y Consulta "find"
+//        $animal_repo = $entityManager->getRepository(Animal::class)->find($id);
+//        
+//        if (!$animal_repo) {
+//            throw $this->createNotFoundException(
+//                'No existe un registro en la tabla animal con el id: '.$id
+//            );
+//        }
+//
+        return new Response('El animal con ese id es: '. $animal->getTipo());
     }
 }
