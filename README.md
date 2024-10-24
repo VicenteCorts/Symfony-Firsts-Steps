@@ -740,6 +740,29 @@ animal_save:
 Para comprobar que todo ha funcionado correctamente podemos crear un SELECT de la tabla modificada por consola: **php bin/console dbal:run-sql 'SELECT * FROM animal'**
 
 ## CLASE 440
-###
+### Find (Extraer registro de la BBDD)
+Creamos una ruta:
+```html
+animal_detail:
+    path: /animal/{id}
+    controller: App\Controller\AnimalController::animal
+```
+Creamos un método "animal" en AnimalController
+```html
+    public function animal(EntityManagerInterface $entityManager, int $id):Response 
+    {
+        //Cargar Repositorio y Consulta "find"
+        $animal_repo = $entityManager->getRepository(Animal::class)->find($id);
+        
+        if (!$animal_repo) {
+            throw $this->createNotFoundException(
+                'No existe un registro en la tabla animal con el id: '.$id
+            );
+        }
 
+        return new Response('El animal con ese id es: '. $animal_repo->getTipo());
+    }
+```
+## CLASE 441
+### 
 

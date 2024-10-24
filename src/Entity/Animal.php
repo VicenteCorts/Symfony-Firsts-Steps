@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\AnimalesRepository;
+use App\Repository\AnimalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AnimalesRepository::class)]
+#[ORM\Entity(repositoryClass: AnimalRepository::class)]
 class Animal
 {
     #[ORM\Id]
