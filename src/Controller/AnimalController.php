@@ -18,7 +18,7 @@ class AnimalController extends AbstractController {
         //Consulta find-all
         $animales = $repository->findAll();
 
-//        //find donde se cumple la condición tipo = perro
+        //find donde se cumple la condición tipo = perro
 //        $animales = $repository->findBy([
 //            'tipo' => 'Perro'
 //        ]);
@@ -34,29 +34,31 @@ class AnimalController extends AbstractController {
 //        ], [
 //            'id' => 'DESC'
 //        ]);
-
-        
-        
-        //QUERY BUILDER CLASE 446
-        $qb = $repository->createQueryBuilder('a')
+//        //QUERY BUILDER CLASE 446
+//        $qb = $repository->createQueryBuilder('a')
 //                ->andWhere("a.color = :color")
 //                ->setParameter('color', 'amarillo')
-                ->orderBy('a.id', 'DESC')
-                ->getQuery();
+//                ->orderBy('a.id', 'DESC')
+//                ->getQuery();
+//        
+//        $resultset = $qb->execute();
+//        //DQL CLASE 447
+//        $dql = "SELECT a FROM App\Entity\Animal a WHERE a.color = 'amarillo'";
+//                
+//        $query = $entityManager->createQuery($dql);
+//        
+//        var_dump($query->getResult());
         
-        $resultset = $qb->execute();
-        
-        
-     
-        //DQL CLASE 447
-        $dql = "SELECT a FROM App\Entity\Animal a WHERE a.color = 'amarillo'";
-                
-        $query = $entityManager->createQuery($dql);
-        
-        var_dump($query->getResult());
-        
-        
-        
+
+        //SQL
+        $conn = $entityManager->getConnection();
+        $sql = "SELECT * FROM Animal ORDER BY id DESC";
+        $resultSet = $conn->executeQuery($sql);
+
+        // Obtener los resultados reales
+        $results = $resultSet->fetchAllAssociative();
+        var_dump($results);
+
         return $this->render('animal/index.html.twig', [
                     'controller_name' => 'AnimalController',
                     'animales' => $animales,
@@ -141,7 +143,7 @@ class AnimalController extends AbstractController {
             //Respuesta final
             $message = 'Animal no encontrado';
         }
-            
+
         return new Response($message);
     }
 }

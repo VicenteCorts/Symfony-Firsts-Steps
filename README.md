@@ -985,7 +985,36 @@ DQL: pseudo lenguaje SQL - Doctrine SQL
         var_dump($query->getResult());
 ```
 ## CLASE 448
-### SQL en Symfony 4 y 5 (?)
+### SQL en Symfony ~4 y 5 (?)~
+https://symfony.com/doc/current/doctrine.html#querying-with-sql
+- Para hacer las consultas mediante SQL normal seguiríamos la siguiente dinámica:
+```html
+    public function index(EntityManagerInterface $entityManager): Response {
+
+        //Cargar Repositorio 
+        $repository = $entityManager->getRepository(Animal::class);
+
+        //Consulta find-all
+        $animales = $repository->findAll();
+
+//SQL
+        $conn = $entityManager->getConnection();
+        $sql = "SELECT * FROM Animal ORDER BY id DESC";
+        $resultSet = $conn->executeQuery($sql);
+
+        // Obtener los resultados reales
+        $results = $resultSet->fetchAllAssociative();
+        var_dump($results);
+
+        return $this->render('animal/index.html.twig', [
+                    'controller_name' => 'AnimalController',
+                    'animales' => $animales,
+        ]);
+    }
+```
+## CLASE 449
+###
+
 
 
 
