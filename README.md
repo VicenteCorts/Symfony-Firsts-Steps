@@ -1089,10 +1089,58 @@ Y en Animalcontroller añadimos:
 ```
 
 ## CLASE 451
+### Formularios
+Podemos usar la forma clásica mediante html, el action y el method. Pero en Symfony la forma más optima es mediante acciones de los controladores.
+- En Symfony los fomrularios están vinculados a las Entidades, de manera automática sabe qué campos añadir. 
+- Igualmente podemos detemrinar qué campos queremos que aparezcan o no.
+- Otra forma posible sería crearnos una Clase específica para cada formulario.
+
+## CLASE 452
+### Crear Formulario - FORM BUILDER
+- https://symfony.com/doc/6.4/forms.html#building-forms
+Primero deberemos importar dentro del AnimalControler ciertos elementos para poder crear campos de formulario:
+```html
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+```
+Segundo, creamos el método para elaborar el formulario:
+```html
+    public function crearAnimal() {
+        $animal = new Animal();
+        $form = $this->createFormBuilder($animal)
+                ->setAction($this->generateUrl('animal_save'))
+                ->setMethod('POST')
+                ->add('tipo', TextType::class)
+                ->add('cantidad', NumberType::class)
+                ->add('raza', TextType::class)
+                ->add('color', TextType::class)
+                ->add('submit', SubmitType::class)
+                ->getForm();
+        
+        //Lo pasamos a una vista para imprimir el formulario
+        return $this->render('animal/crear-animal.html.twig',[
+            'form' => $form,
+        ]);
+    }
+```
+Tercero, creamos una vista para reflejar el Formulario:
+```html
+<h1>Formulario con Symfony 6.4</h1>
+{{ form_start(form) }}
+{{ form_widget(form)}}
+{{ form_end(form)}}
+```
+Pot último nos creamos una ruta:
+```hmtl
+crear-animal:
+    path: /crear-animal
+    controller: App\Controller\AnimalController::crearAnimal
+```
+
+## CLASE 453
 ###
-
-
-
 
 
 

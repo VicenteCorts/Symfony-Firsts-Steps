@@ -8,10 +8,29 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Animal;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 class AnimalController extends AbstractController {
 
-    public function create() {
+    public function crearAnimal() {
+        $animal = new Animal();
+        $form = $this->createFormBuilder($animal)
+                ->setAction($this->generateUrl('animal_save'))
+                ->setMethod('POST')
+                ->add('tipo', TextType::class)
+                ->add('cantidad', NumberType::class)
+                ->add('raza', TextType::class)
+                ->add('color', TextType::class)
+                ->add('submit', SubmitType::class)
+                ->getForm();
         
+        //Lo pasamos a una vista para imprimir el formulario
+        return $this->render('animal/crear-animal.html.twig',[
+            'form' => $form,
+        ]);
     }
     
     #[Route('/animal', name: 'app_animal')]

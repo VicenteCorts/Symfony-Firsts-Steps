@@ -40,3 +40,7 @@ animal_update:
 animal_delete:
     path: /animal/delete/{id}
     controller: App\Controller\AnimalController::delete
+    
+crear-animal:
+    path: /crear-animal
+    controller: App\Controller\AnimalController::crearAnimal
