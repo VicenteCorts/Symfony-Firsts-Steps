@@ -1140,8 +1140,18 @@ crear-animal:
 ```
 
 ## CLASE 453
-###
+### Personalizar Atributos
+Podemos modificar loe elementos del Formulario modificando el código del método:
+```html
+->add('submit', SubmitType::class, [
+      	'label' => 'Crear Animal',
+	'attr' => ['class' => 'btn']
+])
+```
+- Con este ejemplo anterior hacemos que el texto del botón sea 'Crear Animal' y que tenga una clase 'btn' (aunque al no tener bootstrap no está definicia ahora mismo)
 
+## CLASE 454
+### Recibir datos del Formulario
 
 
 

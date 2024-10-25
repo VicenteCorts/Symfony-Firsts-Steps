@@ -24,7 +24,10 @@ class AnimalController extends AbstractController {
                 ->add('cantidad', NumberType::class)
                 ->add('raza', TextType::class)
                 ->add('color', TextType::class)
-                ->add('submit', SubmitType::class)
+                ->add('submit', SubmitType::class, [
+                    'label' => 'Crear Animal',
+                    'attr' => ['class' => 'btn']
+                ])
                 ->getForm();
         
         //Lo pasamos a una vista para imprimir el formulario
