@@ -17,8 +17,27 @@ use App\Form\AnimalType;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints\Email;
+
 class AnimalController extends AbstractController {
 
+    public function validarEmail($email) {
+        
+        $validator = Validation::createValidator();
+        $errores = $validator->validate($email, [
+            new Email()
+        ]);
+        
+        if(count($errores)!=0){
+            echo "El email no se ha validado correctamente";
+        }else{
+            echo "El email SE HA VALIDADO correctamente";
+        }
+        
+        die();
+    }
+    
     public function crearAnimal(EntityManagerInterface $entityManager, Request $request): Response {
         $animal = new Animal();
         $form = $this->createForm(AnimalType::class, $animal);

@@ -1348,22 +1348,43 @@ El resultado es el mismo, pero son buenas prácticas. La definición del formula
 
 ## CLASE 458
 ### Validación de datos aislados
+- https://symfony.com/doc/6.4/reference/constraints.html
+- Creamos una nueva función **validarEmail()** en "AnimalController"
+```html
+    public function validarEmail($email) {
+        var_dump($email);
+        die();
+    }
+```
+- En este caso recibiremos los datos que nos lleguen por la URL (GET)
+- Creamos una nueva ruta para este método:
+```html
+validar_email:
+    path: /validar-email/{email}
+    controller: App\Controller\AnimalController::validarEmail
+```
+El email de prueba llega correctamente por la url y es mostrado mediante el var_dump del método. Ahora queremos validar dicho dato. Para ello existen unas clases que permiten validar: librería validator.
+```html
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints\Email;
+```
+y modificamos el método:
+```html
+    public function validarEmail($email) {
+        
+        $validator = Validation::createValidator();
+        $errores = $validator->validate($email, [
+            new Email()
+        ]);
+        
+        if(count($errores)!=0){
+            echo "El email no se ha validado correctamente";
+        }else{
+            echo "El email SE HA VALIDADO correctamente";
+        }
+        
+        die();
+    }
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# FIN

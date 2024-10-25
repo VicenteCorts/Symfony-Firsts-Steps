@@ -45,3 +45,7 @@ animal_delete:
 crear-animal:
     path: /crear-animal
     controller: App\Controller\AnimalController::crearAnimal
+    
+validar_email:
+    path: /validar-email/{email}
+    controller: App\Controller\AnimalController::validarEmail
