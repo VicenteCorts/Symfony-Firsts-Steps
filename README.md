@@ -1280,6 +1280,10 @@ class Animal
 ```
 ## CLASE 456
 ### Personalizar mensajes de error
+(Ya visto mediante Claude, mensajes ya añadidos en la clase anterior)
+
+## CLASE 457
+### Formularios separados en clases
 
 
 
