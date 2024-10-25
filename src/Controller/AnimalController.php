@@ -10,6 +10,10 @@ use App\Entity\Animal;
 
 class AnimalController extends AbstractController {
 
+    public function create() {
+        
+    }
+    
     #[Route('/animal', name: 'app_animal')]
     public function index(EntityManagerInterface $entityManager): Response {
         //Cargar Repositorio 
