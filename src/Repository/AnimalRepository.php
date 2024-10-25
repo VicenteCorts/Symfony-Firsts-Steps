@@ -40,4 +40,15 @@ class AnimalRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findByRaza($order) {
+        $qb = $this->createQueryBuilder('a')
+//                ->andWhere("a.color = :color")
+//                ->setParameter('color', 'amarillo')
+                ->orderBy('a.id', 'DESC')
+                ->getQuery();
+        
+        $resultset = $qb->execute();
+        
+        return $resultset;
+    }
 }

@@ -1013,9 +1013,60 @@ https://symfony.com/doc/current/doctrine.html#querying-with-sql
     }
 ```
 ## CLASE 449
-###
+### Crear Repositorios
+Un Repositorio es una clase en la que se van a desarrollar una serie d emétodos o una logica que interactuarán con la BBDD. En Symfony los modelos se componene de Entidades y Repositorios.
+- Esta clase va dirigida a la creación de repositorios. Por defecto Al crear la entidad Symfony crea el repositorio correspondiente.
+- La estructura de un Repositorio debe tener los siguientes elementos:
+```html
+<?php
 
+namespace App\Repository;
 
+use App\Entity\Animal;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+/**
+ * @extends ServiceEntityRepository<Animal>
+ */
+class AnimalRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Animal::class);
+    }
+
+    //    /**
+    //     * @return Animales[] Returns an array of Animal objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Animal
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+}
+```
+## CLASE 450
+### Métodos en Repositorios
+Le añadimos un bloque de código más. Estas funciones deben llamarse en base a lo que van a realizar (findAllAnimals()):
+```html
+```
 
 
 

@@ -58,6 +58,9 @@ class AnimalController extends AbstractController {
         // Obtener los resultados reales
         $results = $resultSet->fetchAllAssociative();
         var_dump($results);
+        
+        //REPOSITORIO
+        $animals = $animal_repo->findByRaza('DESC')
 
         return $this->render('animal/index.html.twig', [
                     'controller_name' => 'AnimalController',
