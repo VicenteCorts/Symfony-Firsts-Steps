@@ -1216,8 +1216,70 @@ Y en la vista, añadimos el bloque para mostrar la sessión flash con el mensaje
 ```
 ## CLASE 455
 ### Validación de Formulario
+El **$form->isValid()** del if dentro del método "crearAnimal" ahora mismo no cumple su función, debemos crear normas de validación. Para ello:
+- Dirigirnos al Modelos de Animal (Enityt/Animal.php)
+- Importamos la librería **use Symfony\Component\Validator\Constraints as Assert;**
+- Y añadimos las reglas de validación siguiendo el siguiente ejemplo:
+```html
+<?php
 
+namespace App\Entity;
 
+use App\Repository\AnimalRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#[ORM\Entity(repositoryClass: AnimalRepository::class)]
+class Animal
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'El tipo no puede estar vacío')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'El tipo debe tener al menos {{ limit }} caracteres',
+        maxMessage: 'El tipo no puede tener más de {{ limit }} caracteres'
+    )]
+    private ?string $tipo = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+     #[Assert\NotBlank(message: 'El color no puede estar vacío')]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'El color no puede tener más de {{ limit }} caracteres'
+    )]
+    private ?string $color = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'La raza no puede estar vacía')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'La raza no puede tener más de {{ limit }} caracteres'
+    )]
+    private ?string $raza = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\NotNull(message: 'La cantidad no puede estar vacía')]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La cantidad debe ser un número entero'
+    )]
+    #[Assert\Range(
+        min: 1,
+        max: 1000,
+        notInRangeMessage: 'La cantidad debe estar entre {{ min }} y {{ max }}'
+        )]
+    private ?int $cantidad = null;`
+
+//GETTERS Y SETTERS (...)
+```
+## CLASE 456
+### Personalizar mensajes de error
 
 
 
