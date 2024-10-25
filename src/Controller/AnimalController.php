@@ -13,24 +13,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use App\Form\AnimalType;
+
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class AnimalController extends AbstractController {
 
     public function crearAnimal(EntityManagerInterface $entityManager, Request $request): Response {
         $animal = new Animal();
-        $form = $this->createFormBuilder($animal)
-//                ->setAction($this->generateUrl('animal_save'))
-                ->setMethod('POST')
-                ->add('tipo', TextType::class)
-                ->add('cantidad', NumberType::class)
-                ->add('raza', TextType::class)
-                ->add('color', TextType::class)
-                ->add('submit', SubmitType::class, [
-                    'label' => 'Crear Animal',
-                    'attr' => ['class' => 'btn']
-                ])
-                ->getForm();
+        $form = $this->createForm(AnimalType::class, $animal);
 
         //Conseguir los datos introducidos en el Formulario
         $form->handleRequest($request);

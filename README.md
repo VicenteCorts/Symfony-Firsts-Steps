@@ -1284,7 +1284,70 @@ class Animal
 
 ## CLASE 457
 ### Formularios separados en clases
+En esta clase, extraeremos el formulario creado de AnimalController y lo aislaremos para poder reutulizarlo en más partes del código si fuera necesario.
+- Para eso, vamos a src y creamos una nueva carpera que se llamara "Form" y dentro de esta un arhcivo "AnimalType.php"
+- Dentro de este archivo importamos y copiamos lo siguiente:
+```html
+<?php
 
+namespace App\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+class AnimalType extends SAbstractType {
+    public function builForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('tipo', TextType::class)
+                ->add('cantidad', NumberType::class)
+                ->add('raza', TextType::class)
+                ->add('color', TextType::class)
+                ->add('submit', SubmitType::class, [
+                    'label' => 'Crear Animal',
+                    'attr' => ['class' => 'btn']
+                ]);
+    }
+}
+```
+Por otro lado modificamos AnimalController para hacer uso de AnimalType
+- IMportamos **use App\Form\AnimalType;**
+- Y modificamos el método **crearAnimal**:
+```html
+    public function crearAnimal(EntityManagerInterface $entityManager, Request $request): Response {
+        $animal = new Animal();
+        $form = $this->createForm(AnimalType::class, $animal);
+
+        //Conseguir los datos introducidos en el Formulario
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$animal` variable has also been updated
+            $animal = $form->getData();
+            
+            //Invocar doctrine para que guarde el objeto
+            $entityManager->persist($animal);
+            //Ejecutar orden para que doctrine guarde el objeto
+            $entityManager->flush();
+            
+            //SESION FLASH
+            $session = new Session();
+            $session->getFlashBag()->add('message', 'Animal creado');
+           
+            return $this->redirectToRoute('crear-animal');
+        }
+
+        //Lo pasamos a una vista para imprimir el formulario
+        return $this->render('animal/crear-animal.html.twig', [
+                    'form' => $form,
+        ]);
+    }
+```
+El resultado es el mismo, pero son buenas prácticas. La definición del formulario se encuentra ahora en una clase separada, lo que nos permite reutilizarlo por complejo que sea y sin que estorbe en el controlador.
+
+## CLASE 458
+### Validación de datos aislados
 
 
 
