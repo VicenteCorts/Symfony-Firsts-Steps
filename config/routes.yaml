@@ -28,6 +28,7 @@ animal_index:
 animal_save:
     path: /animal/save
     controller: App\Controller\AnimalController::save
+#    methods: [POST]
     
 animal_detail:
     path: /animal/{id}

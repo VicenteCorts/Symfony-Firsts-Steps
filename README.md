@@ -1152,6 +1152,79 @@ Podemos modificar loe elementos del Formulario modificando el código del métod
 
 ## CLASE 454
 ### Recibir datos del Formulario
+- https://symfony.com/doc/6.4/forms.html#processing-forms
+- Actualmente si metemos datos aleatorios y clicamos en submit, nos generará un registro Perro azul husky 27 (ya que el formulario tiene el action apuntando al método save, el cual tiene otros atributos para el objeto animal predefinidos)
+Para hacer que el formulario guarde los datos y podamos trabajar con ellos haremos:
+- Comentaremos el action del formulario para que no nos redirija al método save
+- Añadiremos un nuevo bloque de código para poder hacer uso de los datos nuevos:
+```html
+use Symfony\Component\HttpFoundation\Session\Session;
+
+class AnimalController extends AbstractController {
+
+    public function crearAnimal(EntityManagerInterface $entityManager, Request $request): Response {
+        $animal = new Animal();
+        $form = $this->createFormBuilder($animal)
+//                ->setAction($this->generateUrl('animal_save'))
+                ->setMethod('POST')
+                ->add('tipo', TextType::class)
+                ->add('cantidad', NumberType::class)
+                ->add('raza', TextType::class)
+                ->add('color', TextType::class)
+                ->add('submit', SubmitType::class, [
+                    'label' => 'Crear Animal',
+                    'attr' => ['class' => 'btn']
+                ])
+                ->getForm();
+
+        //Conseguir los datos introducidos en el Formulario
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$animal` variable has also been updated
+            $animal = $form->getData();
+            
+            //Invocar doctrine para que guarde el objeto
+            $entityManager->persist($animal);
+            //Ejecutar orden para que doctrine guarde el objeto
+            $entityManager->flush();
+            
+            //SESION FLASH
+            $session = new Session();
+            $session->getFlashBag()->add('message', 'Animal creado');
+           
+            return $this->redirectToRoute('crear-animal');
+        }
+
+        //Lo pasamos a una vista para imprimir el formulario
+        return $this->render('animal/crear-animal.html.twig', [
+                    'form' => $form,
+        ]);
+    }
+```
+Y en la vista, añadimos el bloque para mostrar la sessión flash con el mensaje de que el animal se ha creado:
+```html
+<h1>Formulario con Symfony 6.4</h1>
+
+{% for message in app.session.flashbag().get('message') %}
+    {{ message }}
+{% endfor %}
+
+{{ form_start(form) }}
+{{ form_widget(form)}}
+{{ form_end(form)}}
+```
+## CLASE 455
+### Validación de Formulario
+
+
+
+
+
+
+
+
+
 
 
 

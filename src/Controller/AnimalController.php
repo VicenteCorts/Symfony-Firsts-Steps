@@ -13,12 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class AnimalController extends AbstractController {
 
-    public function crearAnimal() {
+    public function crearAnimal(EntityManagerInterface $entityManager, Request $request): Response {
         $animal = new Animal();
         $form = $this->createFormBuilder($animal)
-                ->setAction($this->generateUrl('animal_save'))
+//                ->setAction($this->generateUrl('animal_save'))
                 ->setMethod('POST')
                 ->add('tipo', TextType::class)
                 ->add('cantidad', NumberType::class)
@@ -29,13 +31,32 @@ class AnimalController extends AbstractController {
                     'attr' => ['class' => 'btn']
                 ])
                 ->getForm();
-        
+
+        //Conseguir los datos introducidos en el Formulario
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$animal` variable has also been updated
+            $animal = $form->getData();
+            
+            //Invocar doctrine para que guarde el objeto
+            $entityManager->persist($animal);
+            //Ejecutar orden para que doctrine guarde el objeto
+            $entityManager->flush();
+            
+            //SESION FLASH
+            $session = new Session();
+            $session->getFlashBag()->add('message', 'Animal creado');
+           
+            return $this->redirectToRoute('crear-animal');
+        }
+
         //Lo pasamos a una vista para imprimir el formulario
-        return $this->render('animal/crear-animal.html.twig',[
-            'form' => $form,
+        return $this->render('animal/crear-animal.html.twig', [
+                    'form' => $form,
         ]);
     }
-    
+
     #[Route('/animal', name: 'app_animal')]
     public function index(EntityManagerInterface $entityManager): Response {
         //Cargar Repositorio 
@@ -74,8 +95,6 @@ class AnimalController extends AbstractController {
 //        $query = $entityManager->createQuery($dql);
 //        
 //        var_dump($query->getResult());
-        
-
         //SQL
         $conn = $entityManager->getConnection();
         $sql = "SELECT * FROM Animal ORDER BY id DESC";
@@ -84,7 +103,6 @@ class AnimalController extends AbstractController {
         // Obtener los resultados reales
         $results = $resultSet->fetchAllAssociative();
 //        var_dump($results);
-        
         //REPOSITORIO
         $animals = $repository->findByRaza('DESC');
 
