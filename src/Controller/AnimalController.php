@@ -57,14 +57,14 @@ class AnimalController extends AbstractController {
 
         // Obtener los resultados reales
         $results = $resultSet->fetchAllAssociative();
-        var_dump($results);
+//        var_dump($results);
         
         //REPOSITORIO
-        $animals = $animal_repo->findByRaza('DESC')
+        $animals = $repository->findByRaza('DESC');
 
         return $this->render('animal/index.html.twig', [
                     'controller_name' => 'AnimalController',
-                    'animales' => $animales,
+                    'animales' => $animals,
         ]);
     }
 

@@ -1064,11 +1064,32 @@ class AnimalRepository extends ServiceEntityRepository
 ```
 ## CLASE 450
 ### Métodos en Repositorios
-Le añadimos un bloque de código más. Estas funciones deben llamarse en base a lo que van a realizar (findAllAnimals()):
+Le añadimos un bloque de código más. Estas funciones deben llamarse en base a lo que van a realizar (findByatributo()):
 ```html
+    public function findByRaza($order) {
+        $qb = $this->createQueryBuilder('a')
+                ->orderBy('a.id', 'DESC')
+                ->getQuery();
+        
+        $resultset = $qb->execute();
+        
+        return $resultset;
+    }
+```
+Y en Animalcontroller añadimos:
+```html
+ $repository = $entityManager->getRepository(Animal::class);
+(...)
+        //REPOSITORIO
+        $animals = $repository->findByRaza('DESC');
+
+        return $this->render('animal/index.html.twig', [
+                    'controller_name' => 'AnimalController',
+                    'animales' => $animals,
 ```
 
-
+## CLASE 451
+###
 
 
 
